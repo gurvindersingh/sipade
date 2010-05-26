@@ -4,10 +4,10 @@
 institution: Test
 
 # Define the run mode for the anomaly detection system. options are "online
-# or offline". In online mode SipAD will run continuously, until it will be
+# or offline". In online mode SipADE will run continuously, until it will be
 # killed or system has been crashed. In the offline mode, it will read the
 # given database for the CDR records and will detect the attacks, until the
-# provided ending-date has been reached and after that SipAD will shut down.
+# provided ending-date has been reached and after that SipADE will shut down.
 run-mode: offline
 ending-date: '2010-04-01 00:00:00'
 
@@ -32,7 +32,7 @@ alert-database:
  port: 5432
 
 # Threshold Database Connection Information. To store the threshold value to
-# restore information in case of system crash or SipAD died.
+# restore information in case of system crash or SipADE died.
 threshold-database:
  host: localhost
  username: mydb
@@ -41,7 +41,7 @@ threshold-database:
  table: threshold
  port: 5432
 
-# Logging level for the SipAD detection engine. Options are
+# Logging level for the SipADE detection engine. Options are
 # info, debug or error
 logging-mode: info
 
@@ -54,7 +54,7 @@ alert-file: /var/log/sip_alert.log
 
 # Calltype for which you want to run the detection engine. The options
 # are "International,Mobile,Premium,Service,Domestic,Emergency". If you
-# want to run the SipAD engine for all call types, then specify call-type
+# want to run the SipADE engine for all call types, then specify call-type
 # as "All".
 call-type: "All"
 
