@@ -200,7 +200,7 @@ int main(int argc, char** argv)
             } else if (ret == TRUE) {
                 SipAlertNotification(SIP_STATUS_ALERT, &result);
             } else {
-                //SipAlertNotification(SIP_STATUS_OK, &result);
+                SipAlertNotification(SIP_STATUS_OK, &result);
                 /* Store the recent threshold and timestamp value in to the
                  * database */
                 if (SipAnomalyStoreThreshold() != SIP_OK)
