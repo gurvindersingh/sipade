@@ -1,0 +1,7 @@
+SipADE is an anomaly detection system for the calls made through VoIP. It uses behavioral based algorithm to detect the anomalous behavior and raise the alert based on the analysis. The alert can be sent to the syslog or to the hobbit server, which can further sent the alerts via email, SMS etc.
+
+To install and run the engine, please refer to the reference manual in the docs directory.
+
+If you have any feedback/comments, please send them to:
+
+Gurvinder Singh <gurvindersinghdahiya@gmail.com>
