@@ -1,0 +1,100 @@
+%YAML 1.1
+---
+# Institution name for which we are running the anomaly detection engine.
+institution: Test
+
+# Define the run mode for the anomaly detection system. options are "online
+# or offline". In online mode SipAD will run continuously, until it will be
+# killed or system has been crashed. In the offline mode, it will read the
+# given database for the CDR records and will detect the attacks, until the
+# provided ending-date has been reached and after that SipAD will shut down.
+run-mode: offline
+ending-date: '2010-04-01 00:00:00'
+
+# CDR Database Connection Information. To fetch the cdr records and run
+# the anomaly detection algorithm.
+cdr-database:
+ host: localhost
+ username: mydb
+ password: 123456
+ database-name: asterisk
+ table: cdr
+ port: 5432
+
+# Alert Database Connection Information. To log the CDR record which causes
+# the alert to be raised.
+alert-database:
+ host: localhost
+ username: mydb
+ password: 123456
+ database-name: asterisk
+ table: cdr_alert
+ port: 5432
+
+# Threshold Database Connection Information. To store the threshold value to
+# restore information in case of system crash or SipAD died.
+threshold-database:
+ host: localhost
+ username: mydb
+ password: 123456
+ database-name: asterisk
+ table: threshold
+ port: 5432
+
+# Logging level for the SipAD detection engine. Options are
+# info, debug or error
+logging-mode: info
+
+# Define the alert mode, in which the alert should be sent.
+# The options are syslog, hobbit or both. In case of hobbit/both define
+# the alert file full path and name as provided in the hobbit server
+# configuration.
+alert-mode: hobbit
+alert-file: /var/log/sip_alert.log
+
+# Calltype for which you want to run the detection engine. The options
+# are "International,Mobile,Premium,Service,Domestic,Emergency". If you
+# want to run the SipAD engine for all call types, then specify call-type
+# as "All".
+call-type: "All"
+
+# Default parameter values for anomaly detection algorithm. The sensitivity
+# value tells the engine how sensitive the engine should be to the changes
+# in the call pattern. Its value should be higher than 1.0. As a general rule,
+# if the call traffic is low then value should be near to lower end and vice-
+# versa.The adaptability value tells the engine how to adapt to the small
+# changes in the call placing behavior of the monitoring institution. Its value
+# should be in the range of (0.0-1.0). The interval value tells the engine,
+# after how much duration engine should scan the placed calls. Engine fetched
+# the call records from CDR database, which occurred from the previous scanned
+# time plus the given interval and try to detect the anomaly in the call
+# pattern.
+ad-algo:
+ sensitivity: 1.3
+ adaptability: 0.25
+ interval: 10
+ threshold-restore: 'no'
+ call-freq: 10
+ call-duration: 10
+
+# Default values (minutes) of allowed calls in the given interval for each
+# paid calltype
+call-duration:
+ mobile: 60
+ premium: 60
+ international: 60
+
+# Office working hours values for starting and ending time hours
+# (in 1-24 hour clock format)
+office-time:
+ start_time: 8
+ end_time: 16
+
+# Specify the initial time stamp from whcih training period will start and
+# training-period (minutes) for which you wants to train the engine
+# since the initial-timestamp. Default value is one week period. If you
+# want to start the detection from a specific time, then specify the
+# value as detection-start-ts.
+#initial-timestamp: '2010-01-01 02:03:36'
+training-period: 10800
+#detection-start-ts: '2010-01-11 00:00:00'
